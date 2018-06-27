@@ -12,8 +12,9 @@ public class Ball {
 		this.game = p;
 	}
 	
-	public Ball(PApplet p, int color) {
+	public Ball(PApplet p, int size ,int color) {
 		this.game = p;
+		this.ballSize = size;
 		this.ballColor = game.color(color);
 	}
 }
