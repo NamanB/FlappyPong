@@ -3,6 +3,7 @@ import processing.core.PApplet;
 public class Wall {
 	PApplet game;
 	
+	int wallSpeed = 3;
 	int minGapHeight = 200;
 	int maxGapHeight = 300;
 	int wallWidth = 80;
@@ -12,8 +13,9 @@ public class Wall {
 		game = p;
 	}
 	
-	public Wall(PApplet p, int minGapHeight, int maxGapHeight, int width, int color) {
+	public Wall(PApplet p, int speed, int minGapHeight, int maxGapHeight, int width, int color) {
 		game = p;
+		this.wallSpeed = speed;
 		this.minGapHeight = minGapHeight;
 		this.maxGapHeight = maxGapHeight;
 		this.wallWidth = width;
