@@ -67,15 +67,17 @@ public class Game extends PApplet {
 	
 	public void renderGameScreen() {
 		background(255);
-		racket.draw();
+		racket.render();
 		drawBalls();
 		printScore();
+		drawWalls();
 	}
 	
 	public void tickGameScreen() {
 		watchRacketBounce();
 		updateBalls();
 		wallAdder();
+		updateWalls();
 	}
 	
 	public void gameOverScreen() {
@@ -84,7 +86,7 @@ public class Game extends PApplet {
 	
 	public void drawBalls() { 
 		for (Ball b : balls) {
-			b.draw();
+			b.render();
 		}
 	}
 	
@@ -111,6 +113,12 @@ public class Game extends PApplet {
 		}
 	}
 	
+	public void drawWalls() {
+		for (Wall w : walls) {
+			w.render();
+		}
+	}
+	
 	public void wallAdder() {
 		if (millis() - lastAddTime > wallInterval) {
 			int randHeight = round(random(minGapHeight, maxGapHeight));
@@ -118,6 +126,17 @@ public class Game extends PApplet {
 			Wall w = new Wall(this, width, randY, randHeight);
 			walls.add(w);
 			lastAddTime = millis();
+		}
+	}
+	
+	public void updateWalls() {
+		for (int i = 0; i < walls.size(); i++) {
+			Wall w = walls.get(i);
+			if (w.gapWallX + w.wallWidth <= 0) {
+				walls.remove(i);
+			} else {
+				w.updateWall();
+			}
 		}
 	}
 	

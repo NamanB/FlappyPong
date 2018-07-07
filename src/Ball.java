@@ -26,7 +26,7 @@ public class Ball {
 		this.ballColor = game.color(color);
 	}
 	
-	public void draw() {
+	public void render() {
 		game.fill(ballColor);
 		game.ellipse(ballX, ballY, ballSize, ballSize);
 		drawHealth();

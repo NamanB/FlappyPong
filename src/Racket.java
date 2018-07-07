@@ -20,7 +20,7 @@ public class Racket {
 		this.racketBounceRate = bounceRate;
 	}
 
-	public void draw() {
+	public void render() {
 		game.fill(racketColor);
 		game.arc(game.mouseX, game.mouseY, racketWidth, racketHeight, PConstants.PI + 
 				PConstants.PI / 8, 2 * PConstants.PI - PConstants.PI / 8, PConstants.OPEN);
