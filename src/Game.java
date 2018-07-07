@@ -4,8 +4,14 @@ import processing.core.*;
 
 public class Game extends PApplet {
 	int activeScreen = 0; // 0 = Initial Screen, 1 = Game Screen, 2 = Game-Over Screen
+	int score = 0;
+
+	float gravity = 1;
+	float airFriction = (float) (0.0001);
+	float friction = (float) (.1);
+
 	ArrayList<Ball> balls = new ArrayList<Ball>();
-	
+	ArrayList<Wall> walls = new ArrayList<Wall>();
 	
 	public static void main(String[] args) {
 		PApplet.main("Game");
@@ -16,10 +22,10 @@ public class Game extends PApplet {
 	}
 	
 	public void setup() {
-		balls.add(new Ball(this, 20, 0));
-		Ball b = balls.get(0);
+		Ball b = new Ball(this, 20, 0);
 		b.ballX = width / 4;
 		b.ballY = height / 5;
+		balls.add(b);
 	}
 	
 	public void draw() {
