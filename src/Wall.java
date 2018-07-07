@@ -11,4 +11,12 @@ public class Wall {
 	public Wall(PApplet p) {
 		game = p;
 	}
+	
+	public Wall(PApplet p, int minGapHeight, int maxGapHeight, int width, int color) {
+		game = p;
+		this.minGapHeight = minGapHeight;
+		this.maxGapHeight = maxGapHeight;
+		this.wallWidth = width;
+		this.wallColor = color;
+	}
 }
