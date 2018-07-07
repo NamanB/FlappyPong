@@ -8,6 +8,12 @@ public class Ball {
 	int ballSize = 20;
 	int ballColor = game.color(0);
 	
+	float verticalBallSpeed = 0;
+	float horizontalBallSpeed = 10;
+	float health = 100;
+	float healthDecrease = 1;
+	float healthBarWidth = 60;
+	
 	public Ball(PApplet p) {
 		this.game = p;
 	}
