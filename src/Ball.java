@@ -47,4 +47,49 @@ public class Ball {
 		game.rectMode(PConstants.CORNER);
 		game.rect(ballX - (healthBarWidth / 2), ballY - 30, healthBarWidth * (health / maxHealth), 5);
 	}
+	
+	/**
+	 * Moves the ball
+	 * @param gravity coefficient of gravity
+	 * @param airFriction coefficient of air friction
+	 */
+	public void move(int gravity, float airFriction) {
+		verticalBallSpeed += gravity;
+		ballY += verticalBallSpeed;
+		verticalBallSpeed -= (verticalBallSpeed * airFriction);
+		
+		ballX += horizontalBallSpeed;
+		horizontalBallSpeed -= (horizontalBallSpeed * airFriction);
+	}
+	
+	/**
+	 * Bounces the ball 
+	 * @param surface surface bounced on
+	 * @param isVertical if the bounce is vertical or not (meaning horizontal)
+	 * @param friction coefficient of friction
+	 * @param gravity coefficient of gravity
+	 */
+	public void bounce(float surface, boolean isVertical, float friction, float gravity) {
+		if (isVertical) {
+			ballY = (int) (surface + -ballSize / 2);
+			verticalBallSpeed *= -1;
+			// corrects for constant gravity speed increase being larger than decrease on
+			// bounce
+			verticalBallSpeed -= (verticalBallSpeed * friction) - (gravity + (gravity * friction));
+		} else {
+			ballX = (int) (surface + -ballSize / 2);
+			horizontalBallSpeed *= -1;
+		horizontalBallSpeed -= horizontalBallSpeed * friction;
+		}
+	}
+	
+	/**
+	 * Bounce up off the bottom surface
+	 * @param surface surface to bounce off of
+	 * @param friction coefficient of friction
+	 * @param gravity coefficient of gravity
+	 */
+	public void bottomBounce(float surface, float friction, float gravity) {
+		bounce(surface, true, friction, gravity);
+	}
 }
