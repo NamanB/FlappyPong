@@ -5,18 +5,19 @@ public class Racket {
 	PApplet game;
 	public int racketWidth = 100;
 	public int racketHeight = 15;
-	public int racketColor = game.color(0);
+	public int racketColor = 0;
 	public int racketBounceRate = 20;
 
 	public Racket(PApplet p) {
 		this.game = p;
+		racketColor = game.color(0);
 	}
 
 	public Racket(PApplet p, int width, int height, int color, int bounceRate) {
 		this.game = p;
 		this.racketWidth = width;
 		this.racketHeight = height;
-		this.racketColor = color;
+		this.racketColor = game.color(color);
 		this.racketBounceRate = bounceRate;
 	}
 

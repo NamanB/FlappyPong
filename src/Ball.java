@@ -7,7 +7,7 @@ public class Ball {
 	public int ballX = 0;
 	public int ballY = 0;
 	public int ballSize = 20;
-	public int ballColor = game.color(0);
+	public int ballColor = 0;
 	
 	public float verticalBallSpeed = 0;
 	public float horizontalBallSpeed = 10;
@@ -20,6 +20,7 @@ public class Ball {
 	
 	public Ball(PApplet p) {
 		this.game = p;
+		this.ballColor = game.color(0);
 	}
 	
 	public Ball(PApplet p, int size ,int color) {
@@ -55,7 +56,7 @@ public class Ball {
 	 * @param gravity coefficient of gravity
 	 * @param airFriction coefficient of air friction
 	 */
-	public void move(int gravity, float airFriction) {
+	public void move(float gravity, float airFriction) {
 		verticalBallSpeed += gravity;
 		ballY += verticalBallSpeed;
 		verticalBallSpeed -= (verticalBallSpeed * airFriction);

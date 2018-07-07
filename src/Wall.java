@@ -8,7 +8,7 @@ public class Wall {
 	
 	public int wallSpeed = 3;
 	
-	public int wallColor = game.color(37, 104, 85);
+	public int wallColor = 0;
 	public int gapWallX;
 	public int gapWallY;
 	public int wallWidth = 80;
@@ -18,6 +18,7 @@ public class Wall {
 	
 	public Wall(PApplet p, int gapWallX, int gapWallY,  int gapWallHeight) {
 		game = p;
+		this.wallColor = game.color(37, 104, 85);
 		this.gapWallX = gapWallX;
 		this.gapWallY = gapWallY;
 		this.gapWallHeight = gapWallHeight;
@@ -27,7 +28,7 @@ public class Wall {
 		new Wall(p, gapWallX, gapWallY, gapWallHeight);
 		this.wallSpeed = speed;
 		this.wallWidth = gapWallWidth;
-		this.wallColor = color;
+		this.wallColor = game.color(color);
 	}
 	
 	public void render() {

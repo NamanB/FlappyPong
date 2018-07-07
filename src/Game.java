@@ -67,6 +67,14 @@ public class Game extends PApplet {
 		drawWalls();
 	}
 	
+	//to be used in tick thread
+	public void tickGameScreen() {
+		watchRacketBounce();
+		updateBalls();
+		wallAdder();
+		updateWalls();
+	}
+	
 	public void gameOverScreen() {
 		background(37, 104, 85);
 		textAlign(CENTER);
@@ -114,13 +122,6 @@ public class Game extends PApplet {
 		balls.add(b);
 	}
 	
-	public void tickGameScreen() {
-		watchRacketBounce();
-		updateBalls();
-		wallAdder();
-		updateWalls();
-	}
-	
 	public void drawBalls() { 
 		for (Ball b : balls) {
 			b.render();
@@ -128,7 +129,15 @@ public class Game extends PApplet {
 	}
 	
 	public void updateBalls() {
-		for (Ball b : balls) {
+		for (int i = 0; i < balls.size(); i++) {
+			Ball b = balls.get(i);
+			if (!b.isAlive) {
+				balls.remove(b);
+				i--;
+				if (balls.size() == 0)
+					gameOver();
+			}
+			b.move(gravity, airFriction);
 			b.keepInScreen(friction, gravity);
 		}
 	}
@@ -191,29 +200,20 @@ public class Game extends PApplet {
 			if ((b.ballX + (b.ballSize / 2) > w.gapWallX) && (b.ballX - (b.ballSize / 2) < w.gapWallX + w.wallWidth)
 					&& (b.ballY + (b.ballSize / 2) > wallTopY) && (b.ballY - (b.ballSize / 2) < wallTopY + w.gapWallY)) {
 				// collides with upper wall
-				decreaseHealth(b);
-			}
-
+				b.takeDamage();
+			} 
+			
 			if ((b.ballX + (b.ballSize / 2) > w.gapWallX) && (b.ballX - (b.ballSize / 2) < w.gapWallX + w.wallWidth)
 					&& (b.ballY + (b.ballSize / 2) > wallBottomY)
 					&& (b.ballY - (b.ballSize / 2) < wallBottomY + wallBottomHeight)) {
 				// collides with lower wall
-				decreaseHealth(b);
-			}
-
+				b.takeDamage();
+			} 
+			
 			if (b.ballX > w.gapWallX + (w.wallWidth / 2) && !w.scoredBalls.contains(b)) {
 				w.addBallScored(b);
 				score();
 			}
-		}
-	}
-	
-	public void decreaseHealth(Ball b) {
-		b.takeDamage();
-		if (!b.isAlive) {
-			balls.remove(b);
-			if (balls.size() == 0)
-				gameOver();
 		}
 	}
 	
