@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import processing.core.*;
 
 public class Game extends PApplet {
+	//TODO add threads to separate ticking and rendering
 	int activeScreen = 0; // 0 = Initial Screen, 1 = Game Screen, 2 = Game-Over Screen
 	int gameMode = 0;
 	int score = 0;
@@ -57,11 +58,19 @@ public class Game extends PApplet {
 	}
 	
 	public void gameScreen() {
+		tickGameScreen();
+		renderGameScreen();
+	}
+	
+	public void renderGameScreen() {
 		background(255);
 		racket.draw();
-		watchRacketBounce();
 		drawBalls();
-
+	}
+	
+	public void tickGameScreen() {
+		watchRacketBounce();
+		updateBalls();
 	}
 	
 	public void gameOverScreen() {
@@ -71,6 +80,12 @@ public class Game extends PApplet {
 	public void drawBalls() { 
 		for (Ball b : balls) {
 			b.draw();
+		}
+	}
+	
+	public void updateBalls() {
+		for (Ball b : balls) {
+			
 		}
 	}
 	
