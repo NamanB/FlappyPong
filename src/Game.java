@@ -4,6 +4,7 @@ import processing.core.*;
 
 public class Game extends PApplet {
 	//TODO add threads to separate ticking and rendering
+	//TODO add multiple game modes using the overloaded constructors to change speeds
 	private int activeScreen = 0; // 0 = Initial Screen, 1 = Game Screen, 2 = Game-Over Screen
 //	private int gameMode = 0;
 	public int score = 0;
@@ -13,6 +14,8 @@ public class Game extends PApplet {
 	public float friction = (float) (.1);
 	public float xRacketBounceCoefficient = (float) (0.17);
 	
+	public int minGapHeight = 200;
+	public int maxGapHeight = 300;
 	public int wallInterval = 1500;
 	public float lastAddTime = 0;
 	
@@ -72,6 +75,7 @@ public class Game extends PApplet {
 	public void tickGameScreen() {
 		watchRacketBounce();
 		updateBalls();
+		wallAdder();
 	}
 	
 	public void gameOverScreen() {
@@ -107,6 +111,16 @@ public class Game extends PApplet {
 		}
 	}
 	
+	public void wallAdder() {
+		if (millis() - lastAddTime > wallInterval) {
+			int randHeight = round(random(minGapHeight, maxGapHeight));
+			int randY = round(random(0, height - randHeight));
+			Wall w = new Wall(this, width, randY, randHeight);
+			walls.add(w);
+			lastAddTime = millis();
+		}
+	}
+	
 	public void score() {
 		score++;
 	}
@@ -118,5 +132,4 @@ public class Game extends PApplet {
 		text(score, height / 2, 50);
 	}
 
-	
 }
