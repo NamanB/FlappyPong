@@ -59,10 +59,47 @@ public class Game extends PApplet {
 	public void gameScreen() {
 		background(255);
 		racket.draw();
+		watchRacketBounce();
+
 	}
 	
 	public void gameOverScreen() {
 		
+	}
+	
+	public void watchRacketBounce() {
+		float mouseFrameDist = mouseY - pmouseY;
+		for (Ball b : balls) {
+			if ((b.ballX + b.ballSize / 2 > mouseX - racket.racketWidth / 2) && (b.ballX - b.ballSize / 2 < mouseX + racket.racketWidth / 2)) {
+				if (dist(b.ballX, b.ballY, b.ballX, mouseY) <= (b.ballSize / 2) + abs(mouseFrameDist)) {
+					bottomBounce(mouseY, b);
+					b.horizontalBallSpeed = (b.ballX - mouseX) * xRacketBounceCoefficient;
+					// carry upward speed of racket into ball if moving up into the ball
+					if (mouseFrameDist < 0) {
+						b.ballY += mouseFrameDist;
+						b.verticalBallSpeed += mouseFrameDist;
+					}
+				}
+			}
+		}
+	}
+
+	public void bottomBounce(float surface, Ball b) {
+		bounce(surface, true, b);
+	}
+	
+	public void bounce(float surface, boolean isVertical, Ball b) {
+		if (isVertical) {
+			b.ballY = (int) (surface + -b.ballSize / 2);
+			b.verticalBallSpeed *= -1;
+			// corrects for constant gravity speed increase being larger than decrease on
+			// bounce
+			b.verticalBallSpeed -= (b.verticalBallSpeed * friction) - (gravity + (gravity * friction));
+		} else {
+			b.ballX = (int) (surface + -b.ballSize / 2);
+			b.horizontalBallSpeed *= -1;
+			b.horizontalBallSpeed -= b.horizontalBallSpeed * friction;
+		}
 	}
 	
 }
