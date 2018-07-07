@@ -9,6 +9,10 @@ public class Game extends PApplet {
 	float gravity = 1;
 	float airFriction = (float) (0.0001);
 	float friction = (float) (.1);
+	float xRacketBounceCoefficient = (float) (0.17);
+	
+	int wallInterval = 1500;
+	float lastAddTime = 0;
 
 	ArrayList<Ball> balls = new ArrayList<Ball>();
 	ArrayList<Wall> walls = new ArrayList<Wall>();
