@@ -65,6 +65,15 @@ public class Game extends PApplet {
 		renderGameScreen();
 	}
 	
+	//Functions
+	public void startGame() {
+		activeScreen = 1;
+	}
+
+	public void gameOver() {
+		activeScreen = 2;
+	}
+	
 	public void renderGameScreen() {
 		background(255);
 		racket.render();
@@ -136,7 +145,50 @@ public class Game extends PApplet {
 				walls.remove(i);
 			} else {
 				w.updateWall();
+				watchWallCollision(w);
 			}
+		}
+	}
+	
+	public void watchWallCollision(Wall w) {
+//		int wallTopX = w.gapWallX;
+		int wallTopY = 0;
+		int wallTopWidth = w.wallWidth;
+		int wallTopHeight = w.gapWallY;
+//		int wallBottomX = w.gapWallX;
+		int wallBottomY = w.gapWallY + w.gapWallHeight;
+		int wallBottomWidth = w.wallWidth;
+		int wallBottomHeight = height - (w.gapWallY + w.gapWallHeight);
+
+		for (Ball b : balls) {
+			if ((b.ballX + (b.ballSize / 2) > w.gapWallX) && (b.ballX - (b.ballSize / 2) < w.gapWallX + w.wallWidth)
+					&& (b.ballY + (b.ballSize / 2) > wallTopY) && (b.ballY - (b.ballSize / 2) < wallTopY + w.gapWallY)) {
+				// collides with upper wall
+				decreaseHealth(b);
+			}
+
+//			if ((ballX + (ballSize / 2) > wallBottomX) && (ballX - (ballSize / 2) < wallBottomX + wallBottomWidth)
+//					&& (ballY + (ballSize / 2) > wallBottomY)
+//					&& (ballY - (ballSize / 2) < wallBottomY + wallBottomHeight)) {
+//				// collides with lower wall
+//				decreaseHealth();
+//			}
+//
+//			if (ballX > gapWallX + (gapWallWidth / 2) && wallScored == 0) {
+//				wallScored = 1;
+//				wall[4] = 1;
+//				score();
+			}
+		}
+		
+//	}
+	
+	public void decreaseHealth(Ball b) {
+		b.takeDamage();
+		if (!b.isAlive) {
+			balls.remove(b);
+			if (balls.size() == 0)
+				gameOver();
 		}
 	}
 	

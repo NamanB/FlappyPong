@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 import processing.core.PConstants;
 
@@ -11,6 +13,8 @@ public class Wall {
 	public int gapWallY;
 	public int wallWidth = 80;
 	public int gapWallHeight;
+	
+	public ArrayList<Ball> scoredBalls = new ArrayList<Ball>();
 	
 	public Wall(PApplet p, int gapWallX, int gapWallY,  int gapWallHeight) {
 		game = p;
@@ -35,11 +39,11 @@ public class Wall {
 	}
 	
 	public void updateWall() {
-		move();
+		gapWallX -= wallSpeed;
 	}
 	
-	public void move() {
-		gapWallX -= wallSpeed;
+	public void addBallScored(Ball b) {
+		scoredBalls.add(b);
 	}
 	
 }
