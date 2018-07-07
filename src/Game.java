@@ -4,17 +4,17 @@ import processing.core.*;
 
 public class Game extends PApplet {
 	//TODO add threads to separate ticking and rendering
-	int activeScreen = 0; // 0 = Initial Screen, 1 = Game Screen, 2 = Game-Over Screen
-	int gameMode = 0;
-	int score = 0;
+	private int activeScreen = 0; // 0 = Initial Screen, 1 = Game Screen, 2 = Game-Over Screen
+//	private int gameMode = 0;
+	public int score = 0;
 
-	float gravity = 1;
-	float airFriction = (float) (0.0001);
-	float friction = (float) (.1);
-	float xRacketBounceCoefficient = (float) (0.17);
+	public float gravity = 1;
+	public float airFriction = (float) (0.0001);
+	public float friction = (float) (.1);
+	public float xRacketBounceCoefficient = (float) (0.17);
 	
-	int wallInterval = 1500;
-	float lastAddTime = 0;
+	public int wallInterval = 1500;
+	public float lastAddTime = 0;
 	
 	Racket racket;
 
@@ -85,7 +85,7 @@ public class Game extends PApplet {
 	
 	public void updateBalls() {
 		for (Ball b : balls) {
-			
+			b.keepInScreen(friction, gravity);
 		}
 	}
 	

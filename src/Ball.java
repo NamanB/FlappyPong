@@ -4,17 +4,17 @@ import processing.core.PConstants;
 public class Ball {
 	PApplet game;
 	
-	int ballX = 0;
-	int ballY = 0;
-	int ballSize = 20;
-	int ballColor = game.color(0);
+	public int ballX = 0;
+	public int ballY = 0;
+	public int ballSize = 20;
+	public int ballColor = game.color(0);
 	
-	float verticalBallSpeed = 0;
-	float horizontalBallSpeed = 10;
-	float maxHealth = 100;
-	float health = 100;
-	float healthDecrease = 1;
-	float healthBarWidth = 60;
+	public float verticalBallSpeed = 0;
+	public float horizontalBallSpeed = 10;
+	public float maxHealth = 100;
+	public float health = 100;
+	public float healthDecrease = 1;
+	public float healthBarWidth = 60;
 	
 	public Ball(PApplet p) {
 		this.game = p;
@@ -66,20 +66,21 @@ public class Ball {
 	 * Bounces the ball 
 	 * @param surface surface bounced on
 	 * @param isVertical if the bounce is vertical or not (meaning horizontal)
+	 * @param resetDistToSurface correction distance to surface to
 	 * @param friction coefficient of friction
 	 * @param gravity coefficient of gravity
 	 */
-	public void bounce(float surface, boolean isVertical, float friction, float gravity) {
+	public void bounce(float surface, boolean isVertical, float resetDistToSurface, float friction, float gravity) {
 		if (isVertical) {
-			ballY = (int) (surface + -ballSize / 2);
+			ballY = (int) (surface + resetDistToSurface);
 			verticalBallSpeed *= -1;
 			// corrects for constant gravity speed increase being larger than decrease on
 			// bounce
 			verticalBallSpeed -= (verticalBallSpeed * friction) - (gravity + (gravity * friction));
 		} else {
-			ballX = (int) (surface + -ballSize / 2);
+			ballX = (int) (surface + resetDistToSurface);
 			horizontalBallSpeed *= -1;
-		horizontalBallSpeed -= horizontalBallSpeed * friction;
+			horizontalBallSpeed -= horizontalBallSpeed * friction;
 		}
 	}
 	
@@ -90,6 +91,33 @@ public class Ball {
 	 * @param gravity coefficient of gravity
 	 */
 	public void bottomBounce(float surface, float friction, float gravity) {
-		bounce(surface, true, friction, gravity);
+		bounce(surface, true, -ballSize / 2, friction, gravity);
+	}
+	
+	public void topBounce(float surface, float friction, float gravity) {
+		bounce(surface, true, ballSize / 2, friction, gravity);
+	}
+
+	public void rightBounce(float surface, float friction, float gravity) {
+		bounce(surface, false, -ballSize / 2, friction, gravity);
+	}
+
+	public void leftBounce(float surface, float friction, float gravity) {
+		bounce(surface, false, ballSize / 2, friction, gravity);
+	}
+	
+	public void keepInScreen(float friction, float gravity) {
+		if (ballY + (ballSize / 2) > game.height) {
+			bottomBounce(game.height, friction, gravity);
+		}
+		if (ballY - (ballSize / 2) < 0) {
+			topBounce(0, friction, gravity);
+		}
+		if (ballX + (ballSize / 2) > game.width) {
+			rightBounce(game.width, friction, gravity);
+		}
+		if (ballX - (ballSize / 2) < 0) {
+			leftBounce(0, friction, gravity);
+		}
 	}
 }
