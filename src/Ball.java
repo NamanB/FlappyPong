@@ -23,4 +23,9 @@ public class Ball {
 		this.ballSize = size;
 		this.ballColor = game.color(color);
 	}
+	
+	public void draw() {
+		game.fill(ballColor);
+		game.ellipse(ballX, ballY, ballSize, ballSize);
+	}
 }

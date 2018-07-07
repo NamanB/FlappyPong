@@ -60,11 +60,18 @@ public class Game extends PApplet {
 		background(255);
 		racket.draw();
 		watchRacketBounce();
+		drawBalls();
 
 	}
 	
 	public void gameOverScreen() {
 		
+	}
+	
+	public void drawBalls() { 
+		for (Ball b : balls) {
+			b.draw();
+		}
 	}
 	
 	public void watchRacketBounce() {
