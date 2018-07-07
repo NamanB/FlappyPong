@@ -66,6 +66,7 @@ public class Game extends PApplet {
 		background(255);
 		racket.draw();
 		drawBalls();
+		printScore();
 	}
 	
 	public void tickGameScreen() {
@@ -104,6 +105,17 @@ public class Game extends PApplet {
 				}
 			}
 		}
+	}
+	
+	public void score() {
+		score++;
+	}
+
+	public void printScore() {
+		textAlign(CENTER);
+		fill(0);
+		textSize(30);
+		text(score, height / 2, 50);
 	}
 
 	

@@ -84,12 +84,6 @@ public class Ball {
 		}
 	}
 	
-	/**
-	 * Bounce up off the bottom surface
-	 * @param surface surface to bounce off of
-	 * @param friction coefficient of friction
-	 * @param gravity coefficient of gravity
-	 */
 	public void bottomBounce(float surface, float friction, float gravity) {
 		bounce(surface, true, -ballSize / 2, friction, gravity);
 	}
@@ -106,6 +100,11 @@ public class Ball {
 		bounce(surface, false, ballSize / 2, friction, gravity);
 	}
 	
+	/**
+	 * Keeps ball in screen
+	 * @param friction coefficient of friction
+	 * @param gravity coefficient of gravity
+	 */
 	public void keepInScreen(float friction, float gravity) {
 		if (ballY + (ballSize / 2) > game.height) {
 			bottomBounce(game.height, friction, gravity);
