@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import processing.core.PConstants;
 
 public class Wall {
 	PApplet game;
@@ -23,6 +24,22 @@ public class Wall {
 		this.wallSpeed = speed;
 		this.wallWidth = gapWallWidth;
 		this.wallColor = color;
+	}
+	
+	public void render() {
+ 		game.rectMode(PConstants.CORNER);
+		game.fill(wallColor);
+		game.rect(gapWallX, 0, wallWidth, gapWallY);
+		int gapBottom = gapWallY + gapWallHeight;
+		game.rect(gapWallX, gapBottom, wallWidth, game.height - gapBottom);
+	}
+	
+	public void updateWall() {
+		move();
+	}
+	
+	public void move() {
+		gapWallX -= wallSpeed;
 	}
 	
 }
