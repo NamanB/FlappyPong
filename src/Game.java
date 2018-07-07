@@ -4,6 +4,7 @@ import processing.core.*;
 
 public class Game extends PApplet {
 	int activeScreen = 0; // 0 = Initial Screen, 1 = Game Screen, 2 = Game-Over Screen
+	int gameMode = 0;
 	int score = 0;
 
 	float gravity = 1;
@@ -43,7 +44,13 @@ public class Game extends PApplet {
 
 	//Screens
 	public void initScreen() {
-		
+		background(198, 242, 221);
+		textAlign(CENTER);
+		fill(37, 104, 85);
+		textSize(80);
+		text("Flappy Pong", width/2, height/2);
+		textSize(15); 
+		text("Click to start", width/2, height-30);
 	}
 	
 	public void gameScreen() {
