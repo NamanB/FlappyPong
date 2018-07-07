@@ -14,6 +14,8 @@ public class Game extends PApplet {
 	
 	int wallInterval = 1500;
 	float lastAddTime = 0;
+	
+	Racket racket;
 
 	ArrayList<Ball> balls = new ArrayList<Ball>();
 	ArrayList<Wall> walls = new ArrayList<Wall>();
@@ -27,6 +29,7 @@ public class Game extends PApplet {
 	}
 	
 	public void setup() {
+		racket = new Racket(this);
 		Ball b = new Ball(this, 20, 0);
 		b.ballX = width / 4;
 		b.ballY = height / 5;
@@ -54,7 +57,8 @@ public class Game extends PApplet {
 	}
 	
 	public void gameScreen() {
-		
+		background(255);
+		racket.draw();
 	}
 	
 	public void gameOverScreen() {
