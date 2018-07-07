@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import processing.core.PConstants;
 
 public class Ball {
 	PApplet game;
@@ -10,6 +11,7 @@ public class Ball {
 	
 	float verticalBallSpeed = 0;
 	float horizontalBallSpeed = 10;
+	float maxHealth = 100;
 	float health = 100;
 	float healthDecrease = 1;
 	float healthBarWidth = 60;
@@ -27,5 +29,22 @@ public class Ball {
 	public void draw() {
 		game.fill(ballColor);
 		game.ellipse(ballX, ballY, ballSize, ballSize);
+		drawHealth();
+	}
+	
+	public void drawHealth() {
+		game.noStroke(); // no border
+		game.fill(236, 240, 241);
+		game.rectMode(PConstants.CORNER);
+		game.rect(ballX - (healthBarWidth / 2), ballY - 30, healthBarWidth, 5);
+		if (health > 60) {
+			game.fill(46, 204, 113);
+		} else if (health > 30) {
+			game.fill(230, 126, 34);
+		} else {
+			game.fill(231, 76, 60);
+		}
+		game.rectMode(PConstants.CORNER);
+		game.rect(ballX - (healthBarWidth / 2), ballY - 30, healthBarWidth * (health / maxHealth), 5);
 	}
 }
