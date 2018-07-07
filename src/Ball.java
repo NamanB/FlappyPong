@@ -16,6 +16,8 @@ public class Ball {
 	public float healthDecrease = 1;
 	public float healthBarWidth = 60;
 	
+	public boolean isAlive = true;
+	
 	public Ball(PApplet p) {
 		this.game = p;
 	}
@@ -117,6 +119,13 @@ public class Ball {
 		}
 		if (ballX - (ballSize / 2) < 0) {
 			leftBounce(0, friction, gravity);
+		}
+	}
+	
+	public void takeDamage() {
+		health-= healthDecrease;
+		if (health < 0) {
+			isAlive = false;
 		}
 	}
 }
