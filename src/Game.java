@@ -70,6 +70,18 @@ public class Game extends PApplet {
 		drawWalls();
 	}
 	
+	public void gameOverScreen() {
+		background(37, 104, 85);
+		textAlign(CENTER);
+		fill(240, 240, 240);
+		textSize(16);
+		text("Your Score", width/2, height/2 - 120);
+		textSize(132);
+		text(score, width/2, height/2);
+		textSize(16);
+		text("Click to Restart", width/2, height-30);
+	}
+	
 	//Functions
 	public void startGame() {
 		activeScreen = 1;
@@ -84,10 +96,6 @@ public class Game extends PApplet {
 		updateBalls();
 		wallAdder();
 		updateWalls();
-	}
-	
-	public void gameOverScreen() {
-		
 	}
 	
 	public void drawBalls() { 
