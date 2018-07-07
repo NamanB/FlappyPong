@@ -62,7 +62,12 @@ public class Game extends PApplet {
 	
 	public void gameScreen() {
 		tickGameScreen();
-		renderGameScreen();
+		//regular render method components
+		background(255);
+		racket.render();
+		drawBalls();
+		printScore();
+		drawWalls();
 	}
 	
 	//Functions
@@ -72,14 +77,6 @@ public class Game extends PApplet {
 
 	public void gameOver() {
 		activeScreen = 2;
-	}
-	
-	public void renderGameScreen() {
-		background(255);
-		racket.render();
-		drawBalls();
-		printScore();
-		drawWalls();
 	}
 	
 	public void tickGameScreen() {
@@ -178,7 +175,6 @@ public class Game extends PApplet {
 				score();
 			}
 		}
-		
 	}
 	
 	public void decreaseHealth(Ball b) {
