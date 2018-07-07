@@ -3,10 +3,10 @@ import processing.core.PConstants;
 
 public class Racket {
 	PApplet game;
-	int racketWidth = 100;
-	int racketHeight = 15;
-	int racketColor = game.color(0);
-	int racketBounceRate = 20;
+	public int racketWidth = 100;
+	public int racketHeight = 15;
+	public int racketColor = game.color(0);
+	public int racketBounceRate = 20;
 
 	public Racket(PApplet p) {
 		this.game = p;

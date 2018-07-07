@@ -3,11 +3,11 @@ import processing.core.PApplet;
 public class Wall {
 	PApplet game;
 	
-	int wallSpeed = 3;
-	int minGapHeight = 200;
-	int maxGapHeight = 300;
-	int wallWidth = 80;
-	int wallColor = game.color(37, 104, 85);
+	public int wallSpeed = 3;
+	public int minGapHeight = 200;
+	public int maxGapHeight = 300;
+	public int wallWidth = 80;
+	public int wallColor = game.color(37, 104, 85);
 	
 	public Wall(PApplet p) {
 		game = p;
