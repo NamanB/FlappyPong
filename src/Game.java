@@ -34,10 +34,7 @@ public class Game extends PApplet {
 	
 	public void setup() {
 		racket = new Racket(this);
-		Ball b = new Ball(this, 20, 0);
-		b.ballX = width / 4;
-		b.ballY = height / 5;
-		balls.add(b);
+		addStartingBall();
 	}
 	
 	public void draw() {
@@ -82,6 +79,16 @@ public class Game extends PApplet {
 		text("Click to Restart", width/2, height-30);
 	}
 	
+	// Inputs
+	public void mousePressed() {
+		if (activeScreen == 0) {
+			startGame();
+		}
+		if (activeScreen == 2) {
+			restart();
+		}
+	}
+	
 	//Functions
 	public void startGame() {
 		activeScreen = 1;
@@ -89,6 +96,22 @@ public class Game extends PApplet {
 
 	public void gameOver() {
 		activeScreen = 2;
+	}
+	
+	public void restart() {
+		score = 0;
+		balls.clear();
+		addStartingBall();
+		lastAddTime = 0;
+		walls.clear();
+		activeScreen = 1;
+	}
+	
+	public void addStartingBall() {
+		Ball b = new Ball(this, 20, 0);
+		b.ballX = width / 4;
+		b.ballY = height / 5;
+		balls.add(b);
 	}
 	
 	public void tickGameScreen() {
