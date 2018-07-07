@@ -150,14 +150,13 @@ public class Game extends PApplet {
 		}
 	}
 	
+	/**
+	 * Checks for balls colliding with wall w
+	 * @param w the wall to be checked
+	 */
 	public void watchWallCollision(Wall w) {
-//		int wallTopX = w.gapWallX;
 		int wallTopY = 0;
-		int wallTopWidth = w.wallWidth;
-		int wallTopHeight = w.gapWallY;
-//		int wallBottomX = w.gapWallX;
 		int wallBottomY = w.gapWallY + w.gapWallHeight;
-		int wallBottomWidth = w.wallWidth;
 		int wallBottomHeight = height - (w.gapWallY + w.gapWallHeight);
 
 		for (Ball b : balls) {
@@ -167,21 +166,20 @@ public class Game extends PApplet {
 				decreaseHealth(b);
 			}
 
-//			if ((ballX + (ballSize / 2) > wallBottomX) && (ballX - (ballSize / 2) < wallBottomX + wallBottomWidth)
-//					&& (ballY + (ballSize / 2) > wallBottomY)
-//					&& (ballY - (ballSize / 2) < wallBottomY + wallBottomHeight)) {
-//				// collides with lower wall
-//				decreaseHealth();
-//			}
-//
-//			if (ballX > gapWallX + (gapWallWidth / 2) && wallScored == 0) {
-//				wallScored = 1;
-//				wall[4] = 1;
-//				score();
+			if ((b.ballX + (b.ballSize / 2) > w.gapWallX) && (b.ballX - (b.ballSize / 2) < w.gapWallX + w.wallWidth)
+					&& (b.ballY + (b.ballSize / 2) > wallBottomY)
+					&& (b.ballY - (b.ballSize / 2) < wallBottomY + wallBottomHeight)) {
+				// collides with lower wall
+				decreaseHealth(b);
+			}
+
+			if (b.ballX > w.gapWallX + (w.wallWidth / 2) && !w.scoredBalls.contains(b)) {
+				w.addBallScored(b);
+				score();
 			}
 		}
 		
-//	}
+	}
 	
 	public void decreaseHealth(Ball b) {
 		b.takeDamage();
